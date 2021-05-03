@@ -57,4 +57,11 @@ RSpec.describe User, type: :model do
       should validate_uniqueness_of(:username)
     end
    end
+
+   describe 'associations' do
+    it 'should have many listings' do
+      relation = User.reflect_on_association(:listings)
+      expect(relation.macro).to eql(:has_many)
+    end
+   end
 end
