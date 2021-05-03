@@ -50,9 +50,11 @@ RSpec.describe User, type: :model do
     end
 
     it 'should check that emails are unique' do
-      
+      should validate_uniqueness_of(:email).ignoring_case_sensitivity
     end
-    it 'should check that username is unique'
-    
+
+    it 'should check that username is unique' do
+      should validate_uniqueness_of(:username)
+    end
    end
 end
