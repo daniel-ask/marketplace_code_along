@@ -1,0 +1,8 @@
+<h1><%= @listing.name %></h1>
+<p><%= @listing.description %></p>
+<ul>
+  <li> Price: <%= number_to_currency(@listing.price) %>  </li>
+  <li> Max Speed: <%= @listing.max_speed %> m/s </li>
+  <li> Battery Capacity: <%= @listing.battery_capacity %> mah </li>
+  <li> Weight: <%= @listing.weight %> g </li>
+</ul>

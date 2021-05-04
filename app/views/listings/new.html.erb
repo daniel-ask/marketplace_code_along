@@ -1,0 +1,24 @@
+<h1>Create a new Listing</h1>
+
+<ul>
+<% @listing.errors.full_messages.each do |message| %>
+<li style='color: maroon'><%= message %></li>
+<% end %>
+</ul>
+
+<%= form_with model: @listing, local:true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.label :price %>
+  <%= form.number_field :price, min: 1.00, step: 0.05%>
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+  <%= form.label :max_speed %>
+  <%= form.number_field :max_speed, min: 1%>
+  <%= form.label :weight %>
+  <%= form.number_field :weight, min: 1%>
+  <%= form.label :battery_capacity %>
+  <%= form.number_field :battery_capacity, min: 1 %>
+
+  <%= form.submit %>
+<% end %>
