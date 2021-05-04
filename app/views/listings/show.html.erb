@@ -1,5 +1,6 @@
 <h1><%= @listing.name %></h1>
 <p><%= @listing.description %></p>
+<%= @listing.images.attached? ? (image_tag @listing.images.first , alt:'Image of drone') : (image_tag 'drone_image.jpg', alt:'Default image of drone') %>
 <ul>
   <li> Price: <%= number_to_currency(@listing.price) %>  </li>
   <li> Max Speed: <%= @listing.max_speed %> m/s </li>
