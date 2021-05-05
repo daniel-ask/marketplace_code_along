@@ -1,4 +1,5 @@
 <h1><%= @listing.name %></h1>
+<%= button_tag "Purchase for #{number_to_currency(@listing.price)}",data: {stripe:'payment', session_id: @session_id, public_key: Rails.application.credentials.dig(:stripe, :public_key) }, id:'stripe-button', class:'btn btn-outline-success' %>
 <p><%= @listing.description %></p>
 <%= @listing.images.attached? ? (image_tag @listing.images.first , alt:'Image of drone') : (image_tag 'drone_image.jpg', alt:'Default image of drone') %>
 <ul>
@@ -7,3 +8,8 @@
   <li> Battery Capacity: <%= @listing.battery_capacity %> mah </li>
   <li> Weight: <%= @listing.weight %> g </li>
 </ul>
+
+<%= javascript_include_tag "https://js.stripe.com/v3/" %>
+<%= javascript_pack_tag 'stripe' %>
+
+
