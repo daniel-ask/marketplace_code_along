@@ -1,0 +1,33 @@
+<ul>
+  <% listing.errors.full_messages do |message| %>
+    <li style='color: maroon'><%= message %></li>
+  <% end %>
+</ul>
+
+<%= form_with model: listing do |form| %>
+  <div class='mb-3'>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :price %>
+    <%= form.number_field :price, min: 1.00, step: 0.05%>
+  </div>
+  <div class="mb-3">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+  <%= form.label :max_speed %>
+  <%= form.number_field :max_speed, min: 1%>
+  <div class="mb-3">
+    <%= form.label :weight %>
+    <%= form.number_field :weight, min: 1%>
+  </div>
+  <%= form.label :battery_capacity %>
+  <%= form.number_field :battery_capacity, min: 1 %>
+  <div class="mb-3">
+    <%= form.label :images %>
+    <%= form.file_field :images, accept: 'image/png, image/jpg, image/jpeg, image/gif', multiple: true%>
+  </div>
+  <%= form.submit %>
+<% end %>
