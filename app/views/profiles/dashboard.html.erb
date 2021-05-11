@@ -1,2 +1,53 @@
-<h1>Profiles#dashboard</h1>
-<p>Find me in app/views/profiles/dashboard.html.erb</p>
+<main class="dashboard main-flex">
+  <h1 class='text-center mb-5'><%= @user.username %> dashboard</h1>
+  <section class='tables main-flex'>
+    <h2 class='text-center m-5'>Listings</h2>
+    <table class="table table-striped mb-5">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Date Listed</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.listings.each_with_index do |listing, index| %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= listing.name %></td>
+            <td><%= number_to_currency(listing.price) %></td>
+            <td><%= listing.created_at %></td>
+            <td><%= listing.status %></td>
+            <td><%= link_to 'View', listing, class:'btn btn-outline-success' %> <%= link_to 'Edit', edit_listing_path(listing), class:'btn btn-outline-warning' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <h2 class='text-center m-5'>Purchases</h2>
+  <table class="table table-striped mb-5">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Date Purchased</th>
+        <th scope="col">Reciept</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.purchases.each_with_index do |order, index| %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= order.listing.name %></td>
+          <td><%= number_to_currency(order.listing.price) %></td>
+          <td><%= order.created_at %></td>
+          <td><%= link_to 'View', order.receipt_url %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+</main>

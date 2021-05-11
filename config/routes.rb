@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   post '/purchases/webhook', to: 'purchases#webhook'
   put '/listing/:id/deactive', to: 'listings#deactivate', as: 'deactive_listing'
   patch '/listing/:id/deactive', to: 'listings#deactivate'
+  get '/profile/:id', to: 'profiles#dashboard', as: 'profile' 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
