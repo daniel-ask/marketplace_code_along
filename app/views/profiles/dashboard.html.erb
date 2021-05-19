@@ -1,5 +1,7 @@
 <main class="dashboard main-flex">
   <h1 class='text-center mb-5'><%= @user.username %> dashboard</h1>
+  <h2>First name: <%= @user.profile.first_name %></h2>
+  <h2>Last name: <%= @user.profile.last_name %></h2>
   <section class='tables main-flex'>
     <h2 class='text-center m-5'>Listings</h2>
     <table class="table table-striped mb-5">

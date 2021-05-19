@@ -10,6 +10,7 @@ User.destroy_all
 puts 'Seeding started'
 puts 'Creating daniel@coder.edu and Listings'
 user1 = User.create(username: 'daniel', email: 'daniel@coder.edu', password: 'password')
+user1.create_profile(first_name: 'Daniel', last_name: 'Ask')
 
 10.times do
   user1.listings.create(
@@ -30,8 +31,12 @@ puts 'Creating more users'
     email: Faker::Internet.safe_email,
     password: Faker::Internet.password(min_length: 6)
   )
+  puts user.errors.full_messages
 
-  puts 'Createing listings for user'
+  next unless user.valid?
+
+  user.create_profile(first_name: Faker::Name.first_name , last_name: Faker::Name.last_name)
+  puts 'Creating listings for user'
   5.times do
     user.listings.create(
       name: Faker::Drone.name,

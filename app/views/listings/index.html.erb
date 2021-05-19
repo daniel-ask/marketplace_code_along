@@ -1,8 +1,18 @@
 <h1>Drones for sale:</h1>
-<ul>
+<div class="d-flex justify-content-center flex-wrap">
   <% @listings.each do |listing| %>
-    <li><%= listing.name %> | <%= number_to_currency(listing.price) %> <%= link_to 'Show', listing %></li>
+    <%= link_to listing do %>
+      <div class="card m-3 drone-card" style="width: 18rem;">
+        <%= listing.images.attached? ? ( image_tag listing.images.first ) : ( image_tag 'drone_image.jpg', class:'card-img-top', alt:'image of a drone' ) %>
+        <div class="card-body">
+          <h5 class="card-title"><%= listing.name %></h5>
+          <p class="card-text"><%= listing.description %></p>
+          <p class='card-text'><%= listing.user.username %></p>
+          <p class='card-text'><%= number_to_currency(listing.price) %></p>
+        </div>
+      </div>
+    <% end %>
   <% end %>
-</ul>
+</div>
 
 <%= link_to 'Add a new listing', new_listing_path %>

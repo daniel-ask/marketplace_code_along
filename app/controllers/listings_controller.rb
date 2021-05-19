@@ -4,7 +4,7 @@ class ListingsController < ApplicationController
   before_action :authorize_listing, only: [:edit, :update, :destroy, :deactivate]
 
   def index
-    @listings = Listing.active
+    @listings = Listing.active.includes(:user).with_attached_images
   end
 
   def new
@@ -39,8 +39,8 @@ class ListingsController < ApplicationController
   def show
     stripe_session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
-      client_reference_id: current_user.id,
-      customer_email: current_user.email,
+      client_reference_id: current_user ? current_user.id : nil,
+      customer_email: current_user ? current_user.email : nil,
       line_items:[{ 
         amount: (@listing.price * 100).to_i,
         name: @listing.name,
@@ -52,7 +52,7 @@ class ListingsController < ApplicationController
        payment_intent_data: { 
          metadata: { 
            listing_id: @listing.id,
-           user_id: current_user.id
+           user_id: current_user ? current_user.id : nil
           }
         },
         success_url: "#{root_url}purchases/success?listingId=#{@listing.id}",
